@@ -26,44 +26,30 @@ __meta__ = {
 canvas_color = Color( 0.309804, 0.309804, 0.309804, 1 )
 
 [node name="InfiniteCanvas" parent="." instance=ExtResource( 2 )]
-margin_left = -0.749146
-margin_right = -0.749146
 
 [node name="UITitlebar" parent="." instance=ExtResource( 4 )]
 _menu_popup_path = NodePath("../UIMenuPopup")
 
 [node name="UIToolbar" parent="." instance=ExtResource( 6 )]
-margin_top = 38.0
-margin_bottom = 78.0
 _file_dialog_path = NodePath("../FileDialog")
 _color_picker_path = NodePath("../ColorpickerPopup/PanelContainer/ColorPicker")
 
 [node name="UIStatusBar" parent="." instance=ExtResource( 3 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -24.0
-margin_bottom = 0.0
+offset_top = -23.3596
+offset_bottom = 0.640381
 
 [node name="FileDialog" type="FileDialog" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -385.0
-margin_top = -216.5
-margin_right = 385.0
-margin_bottom = 216.5
 access = 2
-filters = PoolStringArray( "*.lorien" )
+filters = PackedStringArray( "*.lorien" )
 current_dir = "/Projects/Other/lorien/lorien"
 current_file = "Lorien"
 current_path = "/Projects/Other/lorien/lorien/Lorien"
+script = null
 
 [node name="ColorpickerPopup" type="Popup" parent="."]
-margin_left = 364.0
-margin_top = 77.0
-margin_right = 666.0
-margin_bottom = 504.0
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,23 +58,24 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorPicker" type="ColorPicker" parent="ColorpickerPopup/PanelContainer"]
-margin_left = 208.0
-margin_top = 208.0
-margin_right = 516.0
-margin_bottom = 646.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
 edit_alpha = false
+script = null
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="UIMenuPopup" parent="." instance=ExtResource( 5 )]
-margin_top = 38.0
-margin_bottom = 238.0
+items = [  ]
 
 [connection signal="mouse_entered" from="InfiniteCanvas" to="." method="_on_InfiniteCanvas_mouse_entered"]
 [connection signal="mouse_exited" from="InfiniteCanvas" to="." method="_on_InfiniteCanvas_mouse_exited"]

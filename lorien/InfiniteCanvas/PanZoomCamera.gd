@@ -12,13 +12,13 @@ var _is_input_enabled := true
 func _input(event):
 	if _is_input_enabled:
 		if event is InputEventMouseButton:
-			var increment := max(ZOOM_INCREMENT + _current_zoom_level * ZOOM_INCREMENT, ZOOM_INCREMENT)
+			var increment = max(ZOOM_INCREMENT + _current_zoom_level * ZOOM_INCREMENT, ZOOM_INCREMENT)
 			
-			if event.button_index == BUTTON_WHEEL_DOWN:
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				_do_zoom(increment, get_local_mouse_position())
-			elif event.button_index == BUTTON_WHEEL_UP:
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				_do_zoom(-increment, get_local_mouse_position())
-			elif event.button_index == BUTTON_MIDDLE:
+			elif event.button_index == MOUSE_BUTTON_MIDDLE:
 				_pan_active = event.is_pressed()
 		elif event is InputEventMouseMotion:
 			if _pan_active:

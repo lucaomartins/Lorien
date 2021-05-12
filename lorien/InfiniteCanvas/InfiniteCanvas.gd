@@ -1,4 +1,4 @@
-extends ViewportContainer
+extends SubViewportContainer
 class_name InfiniteCanvas
 
 const DEBUG_POINT_TEXTURE = preload("res://Assets/icon.png")
@@ -13,15 +13,15 @@ class Info:
 
 # -------------------------------------------------------------------------------------------------
 #onready var _viewport: Viewport = $Viewport
-onready var _line2d_container: Node2D = $Viewport/Strokes
-onready var _camera: Camera2D = $Viewport/Camera2D
-onready var _cursor: Node2D = $Viewport/BrushCursor
+@onready var _line2d_container: Node2D = $Viewport/Strokes
+@onready var _camera: Camera2D = $Viewport/Camera2D
+@onready var _cursor: Node2D = $Viewport/BrushCursor
 
-export var pressure_curve: Curve
+@export var pressure_curve: Curve
 var _current_line_2d: Line2D
 var _brush_strokes := []
 var _current_brush_stroke: BrushStroke
-var info := Info.new()
+var info = Info.new()
 var _last_mouse_motion: InputEventMouseMotion
 var _current_brush_color := Config.DEFAULT_BRUSH_COLOR
 var _current_brush_size := Config.DEFAULT_BRUSH_SIZE
@@ -39,7 +39,7 @@ func _input(event: InputEvent) -> void:
 		_cursor.global_position = _camera.xform(event.global_position)
 	if _is_enabled:
 		if event is InputEventMouseButton:
-			if event.button_index == BUTTON_LEFT:
+			if event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
 					start_new_line(_current_brush_color, _current_brush_size)
 				else:
@@ -67,12 +67,12 @@ func _physics_process(delta: float) -> void:
 func _make_empty_line2d() -> Line2D:
 	var line := Line2D.new()
 	line.width_curve = Curve.new()
-	#line.begin_cap_mode = Line2D.LINE_CAP_ROUND
-	#line.end_cap_mode = Line2D.LINE_CAP_ROUND
+	line.begin_cap_mode = Line2D.LINE_CAP_ROUND
+	line.end_cap_mode = Line2D.LINE_CAP_ROUND
 	line.joint_mode = Line2D.LINE_CAP_ROUND
-	line.antialiased = false 
-	line.texture = STROKE_TEXTURE
-	line.texture_mode = Line2D.LINE_TEXTURE_STRETCH
+	line.antialiased = true 
+	#line.texture = STROKE_TEXTURE
+	#line.texture_mode = Line2D.LINE_TEXTURE_STRETCH
 	return line
 
 # -------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ func disable() -> void:
 	_is_enabled = false
 
 # -------------------------------------------------------------------------------------------------
-func start_new_line(brush_color: Color, brush_size: float = 6) -> void:
+func start_new_line(brush_color: Color, brush_size: float = 6.0) -> void:
 	_current_line_2d = _make_empty_line2d()
 	_current_line_2d.width = brush_size
 	_current_line_2d.default_color = brush_color
@@ -108,7 +108,7 @@ func add_point(point: Vector2, pressure: float = 1.0) -> void:
 # -------------------------------------------------------------------------------------------------
 func end_line(draw_debug_points: bool = true) -> void:
 	if _current_line_2d != null:
-		if _current_line_2d.points.empty():
+		if _current_line_2d.points.is_empty():
 			_line2d_container.call_deferred("remove_child", _current_line_2d)
 		else:
 			print("%d; removed: %d" % [_current_brush_stroke.points.size(), _current_brush_stroke.points_removed_during_optimize])
@@ -126,7 +126,7 @@ func end_line(draw_debug_points: bool = true) -> void:
 # -------------------------------------------------------------------------------------------------
 func _add_debug_points(line2d: Line2D) -> void:
 	for p in line2d.points:
-		var s = Sprite.new()
+		var s = Sprite2D.new()
 		line2d.add_child(s)
 		s.texture = DEBUG_POINT_TEXTURE
 		s.scale = Vector2.ONE * (line2d.width * .004)
@@ -148,7 +148,7 @@ func add_strokes(strokes: Array, draw_debug_points: bool = true) -> void:
 
 # -------------------------------------------------------------------------------------------------
 func undo_last_line() -> void:
-	if _current_line_2d == null && !_brush_strokes.empty():
+	if _current_line_2d == null && !_brush_strokes.is_empty():
 		var line = _line2d_container.get_child(_line2d_container.get_child_count()-1)
 		info.stroke_count -= 1
 		info.point_count -= line.points.size()

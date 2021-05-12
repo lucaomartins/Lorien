@@ -10,8 +10,8 @@ signal selected
 signal close_requested
 
 # -------------------------------------------------------------------------------------------------
-onready var _filename_button: Button = $HBoxContainer/FilenameButton
-onready var _close_button: TextureButton = $HBoxContainer/CloseButton
+@onready var _filename_button: Button = $HBoxContainer/FilenameButton
+@onready var _close_button: TextureButton = $HBoxContainer/CloseButton
 
 var is_active := false
 var title := "Untitled"

@@ -11,29 +11,29 @@ signal brush_color_changed(color)
 signal brush_size_changed(size)
 
 # -------------------------------------------------------------------------------------------------
-const BUTTON_HOVER_COLOR = Color.maroon
-const BUTTON_CLICK_COLOR = Color.magenta
-const BUTTON_NORMAL_COLOR = Color.white
+const BUTTON_HOVER_COLOR = Color.MAROON
+const BUTTON_CLICK_COLOR = Color.MAGENTA
+const BUTTON_NORMAL_COLOR = Color.WHITE
 
 # -------------------------------------------------------------------------------------------------
-export var _file_dialog_path: NodePath
-export var _color_picker_path: NodePath
+@export var _file_dialog_path: NodePath
+@export var _color_picker_path: NodePath
 
-onready var _new_button: TextureButton = $HBoxContainer/NewFileButton
-onready var _save_button: TextureButton = $HBoxContainer/SaveFileButton
-onready var _open_button: TextureButton = $HBoxContainer/OpenFileButton
-onready var _clear_canvas_button: TextureButton = $HBoxContainer/ClearCanvasButton
-onready var _undo_button: TextureButton = $HBoxContainer/UndoButton
-onready var _redo_button: TextureButton = $HBoxContainer/RedoButton
-onready var _color_button: Button = $HBoxContainer/ColorButton
-onready var _brush_size_label: Label = $HBoxContainer/BrushSizeLabel
-onready var _brush_size_slider: HSlider = $HBoxContainer/BrushSizeSlider
-onready var _color_picker: ColorPicker = get_node(_color_picker_path)
-onready var _color_picker_popup: Popup = get_node(_color_picker_path).get_parent().get_parent() # meh...
+@onready var _new_button: TextureButton = $HBoxContainer/NewFileButton
+@onready var _save_button: TextureButton = $HBoxContainer/SaveFileButton
+@onready var _open_button: TextureButton = $HBoxContainer/OpenFileButton
+@onready var _clear_canvas_button: TextureButton = $HBoxContainer/ClearCanvasButton
+@onready var _undo_button: TextureButton = $HBoxContainer/UndoButton
+@onready var _redo_button: TextureButton = $HBoxContainer/RedoButton
+@onready var _color_button: Button = $HBoxContainer/ColorButton
+@onready var _brush_size_label: Label = $HBoxContainer/BrushSizeLabel
+@onready var _brush_size_slider: HSlider = $HBoxContainer/BrushSizeSlider
+@onready var _color_picker: ColorPicker = get_node(_color_picker_path)
+@onready var _color_picker_popup: Popup = get_node(_color_picker_path).get_parent().get_parent() # meh...
 
 # -------------------------------------------------------------------------------------------------
 func _ready():
-	_color_picker.connect("color_changed", self, "_on_color_changed")
+	_color_picker.connect("color_changed", _on_color_changed)
 	_brush_size_label.text = str(Config.DEFAULT_BRUSH_SIZE)
 	_brush_size_slider.value = Config.DEFAULT_BRUSH_SIZE
 	_on_color_changed(Config.DEFAULT_BRUSH_COLOR)
@@ -48,9 +48,9 @@ func _on_RedoButton_pressed(): emit_signal("redo_action")
 
 func _on_OpenFileButton_pressed():
 	var file_dialog: FileDialog = get_node(_file_dialog_path)
-	file_dialog.mode = FileDialog.MODE_OPEN_FILE
-	file_dialog.connect("file_selected", self, "_on_file_selected_to_open")
-	file_dialog.connect("popup_hide", self, "_on_file_dialog_closed")
+	file_dialog.mode = FileDialog.FILE_MODE_OPEN_FILE
+	file_dialog.connect("file_selected", _on_file_selected_to_open)
+	file_dialog.connect("popup_hide", _on_file_dialog_closed)
 	file_dialog.popup_centered()
 
 
@@ -60,9 +60,9 @@ func _on_file_selected_to_open(filepath: String) -> void:
 
 func _on_SaveFileButton_pressed():
 	var file_dialog: FileDialog = get_node(_file_dialog_path)
-	file_dialog.mode = FileDialog.MODE_SAVE_FILE
-	file_dialog.connect("file_selected", self, "_on_file_selected_to_save")
-	file_dialog.connect("popup_hide", self, "_on_file_dialog_closed")
+	file_dialog.mode = FileDialog.FILE_MODE_SAVE_FILE
+	file_dialog.connect("file_selected", _on_file_selected_to_save)
+	file_dialog.connect("popup_hide", _on_file_dialog_closed)
 	file_dialog.popup_centered()
 
 

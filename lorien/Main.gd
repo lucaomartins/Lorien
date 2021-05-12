@@ -1,26 +1,26 @@
 extends Control
 
 # -------------------------------------------------------------------------------------------------
-export var canvas_color := Color.black
+@export var canvas_color := Color.BLACK
 
-onready var _canvas: InfiniteCanvas = $InfiniteCanvas
-onready var _ui_statusbar: UIStatusbar = $UIStatusBar
-onready var _ui_titlebar: UITitlebar = $UITitlebar
-onready var _ui_toolbar: UIToolbar = $UIToolbar
+@onready var _canvas = $InfiniteCanvas
+@onready var _ui_statusbar = $UIStatusBar
+@onready var _ui_titlebar = $UITitlebar
+@onready var _ui_toolbar = $UIToolbar
 
-onready var _file_dialog: FileDialog = $FileDialog
+@onready var _file_dialog: FileDialog = $FileDialog
 
 # -------------------------------------------------------------------------------------------------
 func _ready():
-	VisualServer.set_default_clear_color(canvas_color)
+	RenderingServer.set_default_clear_color(canvas_color)
 	_file_dialog.current_dir = Config.DEFAULT_FILE_DIALOG_PATH
 	
 	# UI Signals
-	_ui_toolbar.connect("clear_canvas", self, "_on_clear_canvas")
-	_ui_toolbar.connect("open_file", self, "_on_load_file")
-	_ui_toolbar.connect("save_file", self, "_on_save_file")
-	_ui_toolbar.connect("brush_color_changed", self, "_on_brush_color_changed")
-	_ui_toolbar.connect("brush_size_changed", self, "_on_brush_size_changed")
+	_ui_toolbar.connect("clear_canvas", _on_clear_canvas)
+	_ui_toolbar.connect("open_file", _on_load_file)
+	_ui_toolbar.connect("save_file", _on_save_file)
+	_ui_toolbar.connect("brush_color_changed", _on_brush_color_changed)
+	_ui_toolbar.connect("brush_size_changed", _on_brush_size_changed)
 
 # -------------------------------------------------------------------------------------------------
 func _physics_process(delta):

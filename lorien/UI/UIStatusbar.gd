@@ -2,12 +2,12 @@ extends Panel
 class_name UIStatusbar
 
 # -------------------------------------------------------------------------------------------------
-onready var _strokes_label: Label = $MarginContainer/HBoxContainer/Right/StrokesLabel
-onready var _points_label: Label = $MarginContainer/HBoxContainer/Right/PointsLabel
-onready var _pressure_label: Label = $MarginContainer/HBoxContainer/Left/PressureLabel
-onready var _position_label: Label = $MarginContainer/HBoxContainer/Left/PositionLabel
-onready var _zoom_label: Label = $MarginContainer/HBoxContainer/Left/ZoomLabel
-onready var _fps_label: Label = $MarginContainer/HBoxContainer/Left/FpsLabel
+@onready var _strokes_label: Label = $MarginContainer/HBoxContainer/Right/StrokesLabel
+@onready var _points_label: Label = $MarginContainer/HBoxContainer/Right/PointsLabel
+@onready var _pressure_label: Label = $MarginContainer/HBoxContainer/Left/PressureLabel
+@onready var _position_label: Label = $MarginContainer/HBoxContainer/Left/PositionLabel
+@onready var _zoom_label: Label = $MarginContainer/HBoxContainer/Left/ZoomLabel
+@onready var _fps_label: Label = $MarginContainer/HBoxContainer/Left/FpsLabel
 
 # -------------------------------------------------------------------------------------------------
 func set_stroke_count(brush_stroke_count: int) -> void:

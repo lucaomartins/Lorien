@@ -1,4 +1,3 @@
-tool
 extends Control
 class_name UIWindowButton
 
@@ -9,8 +8,8 @@ export var hover_background: Color
 export var hover_texture: Color
 export var texture: Texture
 
-onready var _background: ColorRect = $ColorRect
-onready var _texture_button: TextureButton = $TextureButton
+@onready var _background: ColorRect = $ColorRect
+@onready var _texture_button: TextureButton = $TextureButton
 
 var _original_background_color: Color
 var _original_texture_color: Color
