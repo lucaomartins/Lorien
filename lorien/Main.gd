@@ -84,6 +84,9 @@ func _ready():
 	
 	# Apply state from previous session
 	_apply_state()
+	
+	var utils := NativeUtils.new()
+	utils.say_hello()
 
 # -------------------------------------------------------------------------------------------------
 func _notification(what):

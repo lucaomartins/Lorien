@@ -1,0 +1,14 @@
+[general]
+
+singleton=false
+load_once=true
+reloadable=true
+symbol_prefix="godot_"
+
+[entry]
+
+Windows.64="res://GDNative/win64/liblorien.dll"
+
+[dependencies]
+
+Windows.64=[]

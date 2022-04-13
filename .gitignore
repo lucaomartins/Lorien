@@ -4,3 +4,12 @@
 # Mono-specific ignores
 .mono/
 data_*/
+
+# Editors
+.vscode/
+
+# GDNative
+*.dblite
+native/*.obj
+lorien/GDNative/win64/liblorien.exp
+lorien/GDNative/win64/liblorien.lib

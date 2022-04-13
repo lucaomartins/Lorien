@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://UI/Menubar.gd"
 }, {
+"base": "",
+"class": "NativeUtils",
+"language": "NativeScript",
+"path": "res://GDNative/NativeUtils.gdns"
+}, {
 "base": "WindowDialog",
 "class": "NewPaletteDialog",
 "language": "GDScript",
@@ -176,6 +181,7 @@ _global_script_class_icons={
 "LineTool": "",
 "MainMenu": "",
 "Menubar": "",
+"NativeUtils": "",
 "NewPaletteDialog": "",
 "Palette": "",
 "PaletteButton": "",
